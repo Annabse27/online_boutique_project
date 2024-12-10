@@ -11,6 +11,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 
+AUTH_USER_MODEL = 'users.User'
+
+
 # --- Приложения --- #
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,17 +23,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Local apps
+    'users',
+    #'categories',
+    #'products',
+    #'cart',
+
     # Third-party apps
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-
-    # Local apps
-    'users',
-    'categories',
-    'products',
-    'cart',
-
+    'drf_yasg',
 ]
 
 # --- Middleware --- #
@@ -95,9 +98,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # --- Локализация --- #
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "ru-ru"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -122,7 +125,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'TEST_REQUEST_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
 }
+
 
 # --- CORS настройки --- #
 CORS_ALLOWED_ORIGINS = config('FRONTEND_URL', default='http://localhost:3000').split(',')
