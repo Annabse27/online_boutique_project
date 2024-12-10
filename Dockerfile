@@ -1,21 +1,33 @@
-   # Используем официальный образ Python
-   FROM python:3.12-slim
+# Используем официальный образ Python
+FROM python:3.12-slim
 
-   # Устанавливаем рабочую директорию
-   WORKDIR /app
+# Устанавливаем рабочую директорию
+WORKDIR /app
 
-   # Устанавливаем зависимости для PostgreSQL и сборки
-   RUN apt-get update && apt-get install -y libpq-dev gcc
+# Устанавливаем необходимые системные зависимости
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 
-   # Копируем pyproject.toml и poetry.lock для установки зависимостей
-   COPY pyproject.toml poetry.lock /app/
+# Устанавливаем Poetry версии 1.8.3
+ENV POETRY_VERSION=1.8.3 \
+    POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_NO_INTERACTION=1
 
-   # Устанавливаем Poetry
-   RUN pip install poetry
+RUN pip install --upgrade pip && pip install poetry==${POETRY_VERSION}
 
-   # Устанавливаем зависимости без разработки
-   RUN poetry config virtualenvs.create false \
-    && poetry install --no-dev --no-interaction --no-ansi
+# Копируем файлы зависимостей
+COPY pyproject.toml poetry.lock /app/
 
-   # Копируем все файлы проекта в контейнер
-   COPY . .
+# Устанавливаем зависимости без разработки
+RUN poetry install --no-dev --no-interaction --no-ansi
+
+# Копируем все файлы проекта в контейнер
+COPY . .
+
+# Удаляем ненужные файлы и очищаем кэш
+RUN apt-get purge -y --auto-remove gcc && rm -rf /var/lib/apt/lists/*
+
+# ENTRYPOINT позволяет передавать команды через docker-compose.yml или docker run
+ENTRYPOINT ["sh", "-c"]
