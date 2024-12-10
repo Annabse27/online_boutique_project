@@ -1,0 +1,22 @@
+[
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "name": "iPhone 14",
+            "slug": "iphone-14",
+            "price": 999.99,
+            "subcategory": 1
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "name": "Samsung Galaxy S23",
+            "slug": "samsung-galaxy-s23",
+            "price": 899.99,
+            "subcategory": 2
+        }
+    }
+]

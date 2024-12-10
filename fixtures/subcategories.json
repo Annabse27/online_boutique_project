@@ -1,0 +1,22 @@
+[
+    {
+        "model": "categories.subcategory",
+        "pk": 1,
+        "fields": {
+            "category": 1,
+            "name": "Смартфоны",
+            "slug": "smartphones",
+            "image": "subcategories/smartphones.jpg"
+        }
+    },
+    {
+        "model": "categories.subcategory",
+        "pk": 2,
+        "fields": {
+            "category": 1,
+            "name": "Ноутбуки",
+            "slug": "laptops",
+            "image": "subcategories/laptops.jpg"
+        }
+    }
+]

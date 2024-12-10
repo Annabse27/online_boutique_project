@@ -1,0 +1,31 @@
+[
+    {
+        "model": "categories.category",
+        "pk": 1,
+        "fields": {
+            "name": "Electronics",
+            "slug": "electronics",
+            "image": null
+        }
+    },
+    {
+        "model": "categories.subcategory",
+        "pk": 1,
+        "fields": {
+            "category": 1,
+            "name": "Smartphones",
+            "slug": "smartphones",
+            "image": null
+        }
+    },
+    {
+        "model": "categories.subcategory",
+        "pk": 2,
+        "fields": {
+            "category": 1,
+            "name": "Tablets",
+            "slug": "tablets",
+            "image": null
+        }
+    }
+]
