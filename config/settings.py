@@ -25,8 +25,8 @@ INSTALLED_APPS = [
 
     # Local apps
     'users',
-    #'categories',
-    #'products',
+    'categories',
+    'products',
     #'cart',
 
     # Third-party apps
@@ -126,7 +126,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',  # Доступ по умолчанию разрешен
     ),
     'TEST_REQUEST_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
