@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import generics, permissions
+from .models import Category
+from .serializers import CategorySerializer
 
-# Create your views here.
+
+class CategoryListView(generics.ListAPIView):
+    """Список всех категорий с подкатегориями"""
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.AllowAny]  # Доступ для всех пользователей
