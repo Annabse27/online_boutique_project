@@ -1,6 +1,7 @@
 import pytest
 from rest_framework.test import APIClient
 from products.models import Product
+from .models import Cart
 from categories.models import Category, SubCategory
 from django.contrib.auth import get_user_model
 
@@ -14,6 +15,7 @@ class TestCartAPI:
         self.client = APIClient()
         self.user = User.objects.create_user(email='testuser@example.com', password='password123')
         self.client.force_authenticate(user=self.user)
+        self.cart = Cart.objects.create(user=self.user)  #Убедиться, что корзина создаётся
 
     def test_view_cart(self):
         """Тест на просмотр корзины"""

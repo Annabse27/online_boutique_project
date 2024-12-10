@@ -5,7 +5,7 @@ from products.models import Product
 
 class Cart(models.Model):
     """Модель корзины, привязанная к пользователю"""
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='cart'
@@ -37,6 +37,7 @@ class CartItem(models.Model):
         unique_together = ('cart', 'product')
         verbose_name = "Элемент корзины"
         verbose_name_plural = "Элементы корзины"
+
 
     def __str__(self):
         return f"{self.product.name} x {self.quantity} в корзине {self.cart.user.email}"
