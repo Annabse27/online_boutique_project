@@ -8,22 +8,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cart', '0001_initial'),
+        ("cart", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='cart',
-            options={'verbose_name': 'Корзина', 'verbose_name_plural': 'Корзины'},
+            name="cart",
+            options={"verbose_name": "Корзина", "verbose_name_plural": "Корзины"},
         ),
         migrations.AlterModelOptions(
-            name='cartitem',
-            options={'verbose_name': 'Элемент корзины', 'verbose_name_plural': 'Элементы корзины'},
+            name="cartitem",
+            options={
+                "verbose_name": "Элемент корзины",
+                "verbose_name_plural": "Элементы корзины",
+            },
         ),
         migrations.AlterField(
-            model_name='cart',
-            name='user',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='cart', to=settings.AUTH_USER_MODEL),
+            model_name="cart",
+            name="user",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="cart",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
